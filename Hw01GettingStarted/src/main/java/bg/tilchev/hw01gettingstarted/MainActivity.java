@@ -11,6 +11,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private static int implicitButtonClickCount = 0;
     private static int explicitButtonClickCount = 0;
+    private static int lastID = -1;
 
     private Button getExplicitButton() {
         View view = this.findViewById(R.id.explicit_button);
@@ -140,9 +141,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         if (textView.getText().equals(Integer.toString(R.id.ivanButton))) {
             textView.setText(button.getText());
-            return;
+        } else {
+            textView.setText(Integer.toString(button.getId()));
         }
-        textView.setText(Integer.toString(button.getId()));
+        lastID = button.getId();
     }
 
     private void onPeshoButtonClick(View view) {
@@ -156,9 +158,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         if (textView.getText().equals(Integer.toString(R.id.peshoButton))) {
             textView.setText(button.getText());
-            return;
+        } else {
+            textView.setText(Integer.toString(button.getId()));
         }
-        textView.setText(Integer.toString(button.getId()));
+        lastID = button.getId();
     }
 
     private void onGoshoButtonClick(View view) {
@@ -172,17 +175,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         if (textView.getText().equals(Integer.toString(R.id.goshoButton))) {
             textView.setText(button.getText());
-            return;
+        } else {
+            textView.setText(Integer.toString(button.getId()));
         }
-        textView.setText(Integer.toString(button.getId()));
+        lastID = button.getId();
     }
 
     private void onTextViewClick(View view) {
         TextView textView = (TextView) view;
-        if (textView.getText().equals("New Text")) {
+        if (lastID == -1) {
             return;
         }
-        int componentID = Integer.parseInt(textView.getText().toString());
+        int componentID = lastID;
         String componentName = ((Button)this.findViewById(componentID))
                 .getText().toString();
         String info = String.format("ID: %s%nName: %s", componentID, componentName);
