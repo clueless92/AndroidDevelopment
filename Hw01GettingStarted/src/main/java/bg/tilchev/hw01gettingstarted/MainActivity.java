@@ -20,7 +20,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return null;
     }
 
-    private Button getButton1() {
+    private Button getIvanButton() {
         View view = this.findViewById(R.id.ivanButton);
         if (view instanceof Button) {
             return (Button) view;
@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return null;
     }
 
-    private Button getButton2() {
+    private Button getPeshoButton() {
         View view = this.findViewById(R.id.peshoButton);
         if (view instanceof Button) {
             return (Button) view;
@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return null;
     }
 
-    private Button getButton3() {
+    private Button getGoshoButton() {
         View view = this.findViewById(R.id.goshoButton);
         if (view instanceof Button) {
             return (Button) view;
@@ -62,23 +62,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         explicitButton.setOnClickListener(this);
 
-        Button button1 = this.getButton1();
-        if (button1 == null) {
+        Button ivanButton = this.getIvanButton();
+        if (ivanButton == null) {
             return;
         }
-        button1.setOnClickListener(this);
+        ivanButton.setOnClickListener(this);
 
-        Button button2 = this.getButton2();
-        if (button2 == null) {
+        Button peshoButton = this.getPeshoButton();
+        if (peshoButton == null) {
             return;
         }
-        button2.setOnClickListener(this);
+        peshoButton.setOnClickListener(this);
 
-        Button button3 = this.getButton3();
-        if (button3 == null) {
+        Button goshoButton = this.getGoshoButton();
+        if (goshoButton == null) {
             return;
         }
-        button3.setOnClickListener(this);
+        goshoButton.setOnClickListener(this);
 
         TextView textView = this.getTextView();
         if (textView == null) {
@@ -102,7 +102,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         implicitButton.setText(Integer.toString(implicitButtonClickCount));
     }
 
-    // explicit button clicking => no reflection
+    // explicit button clicking
     @Override
     public void onClick(View view) {
         if (view instanceof Button) {
