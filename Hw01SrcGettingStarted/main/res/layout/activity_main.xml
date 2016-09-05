@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="bg.tilchev.hw01gettingstarted.MainActivity">
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explicit Button"
+            android:id="@+id/explicit_button"
+            android:layout_alignTop="@+id/implicit_button" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onImplicitButtonClick"
+            android:text="Implicit Button"
+            android:id="@+id/implicit_button"
+            android:layout_centerVertical="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onTextViewClick"
+            android:text="New Text"
+            android:id="@+id/textView" android:layout_centerHorizontal="true"
+        android:clickable="true" />
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onButton1Click"
+            android:text="Ivan"
+            android:id="@+id/ivanButton" android:layout_below="@+id/textView" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_marginTop="46dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onButton2Click"
+            android:text="Pesho"
+            android:id="@+id/peshoButton"
+            android:layout_alignTop="@+id/ivanButton" android:layout_centerHorizontal="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onButton3Click"
+            android:text="Gosho"
+            android:id="@+id/goshoButton" android:layout_alignTop="@+id/peshoButton"
+            android:layout_alignRight="@+id/explicit_button" android:layout_alignEnd="@+id/explicit_button"/>
+</RelativeLayout>
