@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button_shopenhagen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".33"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/shopenhagen" />
+
+    <Button
+        android:id="@+id/button_svishtokio"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".33"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/svishtokio" />
+
+    <Button
+        android:id="@+id/button_hiustanovo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".33"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hiustanovo" />
+</LinearLayout>

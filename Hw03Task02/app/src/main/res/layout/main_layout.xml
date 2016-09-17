@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    tools:context="bg.tilchev.hw03task02.MainActivity">
+
+    <fragment
+        android:id="@+id/fragment_start"
+        android:name="bg.tilchev.hw03task02.ButtonFragment"
+        class="bg.tilchev.hw03task02.ButtonFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
