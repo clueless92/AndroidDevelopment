@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Spotify Mock</string>
+    <string name="rev_button_text"><![CDATA[<<]]></string>
+    <string name="pause_text">| |</string>
+    <string name="play_text"><![CDATA[>]]></string>
+    <string name="fwd_text"><![CDATA[>>]]></string>
+    <string name="stop_text"> x </string>
+</resources>

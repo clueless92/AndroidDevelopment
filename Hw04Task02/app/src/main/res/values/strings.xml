@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hw04Task02</string>
+    <string name="batery_status">100</string>
+    <string name="button">Button</string>
+</resources>

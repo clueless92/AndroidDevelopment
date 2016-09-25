@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/layout_width"
+    android:layout_height="@dimen/layout_height"
+    android:orientation="vertical"
+    android:background="@color/color_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view"
+        android:padding="@dimen/padding_size"
+        android:background="@color/color_background"
+        android:gravity="start|center"
+        android:textColor="@color/selector_white_green" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/icons_height"
+        android:src="@drawable/explicit_cut"
+        android:layout_marginBottom="@dimen/icons_height" />
+
+</LinearLayout>
