@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "Refreshed RV with added items");
         DatabaseManager dataManager = this.getDatabaseManager();
         List<Item> itemsFromDB = dataManager.getAllItems();
-        this.mAdapter.setItems(itemsFromDB);
+        this.mAdapter.addItems(itemsFromDB);
     }
 
     private void onAddToDbButtonClicked() {
@@ -74,7 +74,14 @@ public class MainActivity extends AppCompatActivity
         int currNewIndex = dataManager.getItemCount();
         int limit = currNewIndex + AMOUNT_TO_ADD_ON_CLICK;
         for (int i = currNewIndex; i < limit; i++) {
-            Item item = new Item(i, "Asd", this.getString(R.string.test_base64_img));
+            Item item;
+            if (i % 3 == 0) {
+                item = new Item(i, "Even", this.getString(R.string.test_base64_img));
+            } else if (i % 3 == 1) {
+                item = new Item(i, "Odd", this.getString(R.string.laptop_base64_img));
+            } else {
+                item = new Item(i, "Odd", null);
+            }
             dataManager.addItem(item);
         }
     }

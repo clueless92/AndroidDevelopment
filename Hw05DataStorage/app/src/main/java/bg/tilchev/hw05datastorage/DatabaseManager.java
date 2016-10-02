@@ -9,10 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Todor Ilchev on 2016-09-30.
- */
-
 public class DatabaseManager extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -31,7 +27,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String createDataBaseSQL = "CREATE TABLE " + TABLE_ITEMS + " (" +
                 KEY_ITEM_ID + " INT PRIMARY KEY, " +
                 KEY_ITEM_TEXT + " VARCHAR(50), " +
-                KEY_ITEM_IMG + " LONGTEXT);";
+                KEY_ITEM_IMG + " MEDIUMTEXT);";
         db.execSQL(createDataBaseSQL);
     }
 
@@ -42,7 +38,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public void addItem(Item item) {
-        // TODO: move to app lair (singleton)
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ITEM_ID, item.getId());
@@ -53,7 +48,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public Item getItem(int id) {
-        // TODO: move to app lair (singleton)
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.query(
                 TABLE_ITEMS,
@@ -79,7 +73,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public List<Item> getAllItems() {
-        // TODO: move to app lair (singleton)
         SQLiteDatabase database = this.getReadableDatabase();
         String rawSQL = "SELECT * FROM " + TABLE_ITEMS;
         Cursor allItemsCursor = database.rawQuery(rawSQL, null);
@@ -101,7 +94,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public void updateItem(Item item) {
-        // TODO: move to app lair (singleton)
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ITEM_ID, item.getId());
@@ -109,10 +101,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
         values.put(KEY_ITEM_IMG, item.getBase64ImgStr());
         String id = Integer.toString(item.getId());
         database.update(TABLE_ITEMS, values, KEY_ITEM_ID + " =? ", new String[]{id});
+        database.close();
     }
 
     public int getItemCount() {
-        // TODO: move to app lair (singleton)
         SQLiteDatabase database = this.getReadableDatabase();
         String rawSQL = "SELECT * FROM " + TABLE_ITEMS;
         Cursor allItemsCursor = database.rawQuery(rawSQL, null);
@@ -125,5 +117,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         allItemsCursor.close();
         database.close();
         return count;
+    }
+
+    public void deleteContact(Item contact) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_ITEMS, KEY_ITEM_ID + " = ?",
+                new String[] { String.valueOf(contact.getId()) });
+        database.close();
     }
 }

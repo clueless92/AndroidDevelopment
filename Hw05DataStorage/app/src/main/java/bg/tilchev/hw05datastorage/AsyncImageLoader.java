@@ -5,32 +5,36 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Base64;
 
-public class AsyncImageLoader extends AsyncTask<Item, Void, Bitmap> {
+public class AsyncImageLoader extends AsyncTask<String, Void, Bitmap> {
 
     public interface Listener {
 
-        void onImageLoaded(Bitmap bitmap);
+        void onImageLoaded(Bitmap bitmap, long execTime, int position);
     }
 
     private Listener mListener;
+    private long mExecTime;
+    private int mPosition;
 
-    public AsyncImageLoader(Listener listener) {
+    public AsyncImageLoader(Listener listener, int position) {
         this.mListener = listener;
+        this.mPosition = position;
     }
 
     @Override
-    protected Bitmap doInBackground(Item... params) {
+    protected void onPreExecute() {
+        this.mExecTime = System.currentTimeMillis();
+    }
+
+    @Override
+    protected Bitmap doInBackground(String... params) {
         if (params == null) {
             return null;
         }
         if (params.length < 1) {
             return null;
         }
-        Item item = params[0];
-        if (item == null) {
-            return null;
-        }
-        String base64ImgStr = item.getBase64ImgStr();
+        String base64ImgStr = params[0];
         if (base64ImgStr == null) {
             return null;
         }
@@ -41,7 +45,7 @@ public class AsyncImageLoader extends AsyncTask<Item, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap resultBitmap) {
         if (this.mListener != null) {
-            this.mListener.onImageLoaded(resultBitmap);
+            this.mListener.onImageLoaded(resultBitmap, this.mExecTime, this.mPosition);
         }
     }
 }

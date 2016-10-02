@@ -25,6 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     protected class ViewHolder extends RecyclerView.ViewHolder implements AsyncImageLoader.Listener {
 
         private Listener mListener;
+        private long currExecTime;
 
         private TextView getTextView(View rootView) {
             if (rootView == null) {
@@ -79,14 +80,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageView.setImageBitmap(bitmap);
         }
 
+        private void setImageViewResId(int resId) {
+            ImageView imageView = this.getImageView(this.itemView);
+            if (imageView == null) {
+                return;
+            }
+            imageView.setImageResource(resId);
+        }
+
         @Override
-        public void onImageLoaded(Bitmap bitmap) {
+        public void onImageLoaded(Bitmap bitmap, long execTime, int position) {
+            if (execTime < this.currExecTime) {
+                return;
+            }
+            this.currExecTime = execTime;
             if (bitmap == null) {
+                this.setImageViewResId(R.mipmap.ic_launcher);
                 return;
             }
             this.setImageViewBitmap(bitmap);
-            int currPosition = this.getAdapterPosition();
-            Item item = RecyclerViewAdapter.this.mItems.get(currPosition);
+            if (position < 0 || position >= RecyclerViewAdapter.this.getItemCount()) {
+                return;
+            }
+            Item item = RecyclerViewAdapter.this.mItems.get(position);
             int id = item.getId();
             Map<Integer, Bitmap> bitmapCache = RecyclerViewAdapter.this.getLoadedBitmaps();
             bitmapCache.put(id, bitmap);
@@ -103,8 +119,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mListener = listener;
     }
 
-    public void setItems(List<Item> items) {
-        this.mItems = items;
+    public void addItems(List<Item> items) {
+        int start = this.getItemCount();
+        int limit = items.size();
+        for (int i = start; i < limit; i++) {
+            this.mItems.add(items.get(i));
+        }
         this.notifyDataSetChanged();
     }
 
@@ -143,8 +163,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Map<Integer, Bitmap> bitmapCache = this.getLoadedBitmaps();
         Bitmap bitmap = bitmapCache.get(id);
         if (bitmap == null) {
-            AsyncImageLoader imageLoader = new AsyncImageLoader(holder);
-            imageLoader.execute(item);
+            AsyncImageLoader imageLoader = new AsyncImageLoader(holder, position);
+            imageLoader.execute(item.getBase64ImgStr());
         } else {
             holder.setImageViewBitmap(bitmap);
         }
