@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ImageEncoder</string>
+    <string name="permission_rationale">"Camera permissions are needed for providing camera completions."</string>
+</resources>
